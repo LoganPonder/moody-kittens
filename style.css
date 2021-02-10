@@ -322,6 +322,10 @@ button.reset-kittens:hover {
   display: none !important;
 }
 
+.home-logo {
+  border: 2px solid white;
+  padding: 3px;
+}
 .home-logo:hover {
   cursor: pointer;
   filter: brightness(200%);

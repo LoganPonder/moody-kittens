@@ -16,16 +16,25 @@ let kittens = [];
 function addKitten(event) {
   event.preventDefault();
 
+  let existingKitten = false;
+
   let form = event.target;
   if(!form.name.value) {
-   return alert('Please enter a valid kitten name');
+   return alert('Please enter a valid kitten name.');
   }
-  //TODO this is providing alert, but still adding to DOM, why?
+
   kittens.forEach(kitten => {
     if(kitten.name === form.name.value) {
-      return alert('That kitten already exist. Please select another name.');
+      existingKitten = true;
+      return alert('That kitten already exists. Please select another name.');
     } 
   })
+
+  //conditional allowing addKitten function to stop executing if kitten.name already exist in kittens array.
+  if(existingKitten === true) {
+    form.reset();
+    return;
+  }
 
   let kitten = {
     id: generateId(),
@@ -48,8 +57,6 @@ function addKitten(event) {
  */
 function saveKittens() {
   window.localStorage.setItem('kittens', JSON.stringify(kittens));
-  //TODO do i drawKittens() here?
-  // loadKittens();
 }
 
 /**
@@ -237,6 +244,7 @@ function generateId() {
 function randomNum() {
   return Math.floor(Math.random() * 10) + 1
 }
+
 function reloadPage() {
   location.reload();
   return false;
